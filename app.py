@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 import uvicorn
 
+from controller import calendar
+
 app = FastAPI()
 
+app.include_router(calendar.router, prefix='/api/v1', tags=['calendar_api'])
 
 @app.get('/')
 def home():

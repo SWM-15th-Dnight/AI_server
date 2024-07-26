@@ -7,10 +7,26 @@ class GptAPI:
 
     def __init__(self):
         self.client = OpenAI(api_key=OPENAI_API_KEY)
+    
+    
+    def create_prompt_request(self, prompt, model = 'gpt-4o'):
+        """
+        정상적인 요청이 아닌, 새로 생긴 프롬프트의 토큰 수를 확인하기 위한 요청
+        """
+        response = self.client.chat.completions.create(
+            response_format={"type" : "text"},
+            model=model,
+            messages=[
+                {"role": "system", "content": f"{prompt}, 현재 시간은 {datetime.now()}야. Json타입. 일정 정보를 파악 못하면 summary만 반환해"},
+                {"role": "user", "content": ""}
+            ]
+        )
+        
+        return response
+    
 
     def text_request(self, text, prompt, model = 'gpt-4o'):
-        
-        '''
+        """
         response_object = {
             "choices": [
                 {
@@ -33,19 +49,17 @@ class GptAPI:
                 "total_tokens": 74
             }
         }
-        '''
+        """
         
         response = self.client.chat.completions.create(
             response_format={"type" : "json_object"},
             model=model,
             messages=[
-                # 프롬프트 또한 상황에 맞게 적절한 프롬프트로 커스텀할 수 있도록, DB에서 꺼내와 쓰는 방식으로 교체할 예정
-                {"role": "system", "content": f"{prompt}, 현재 시간은 {datetime.now()}야. Json으로 반환해줘"},
+                # 주입받은 프롬프트를 활용하고, 시간은 서버의 시간을 사용.
+                # json_object 타입의 response_format을 쓰기 위해서는 프롬프트 내에 Json이라는 문자 자체가 있어야함.
+                {"role": "system", "content": f"{prompt}, 현재 시간은 {datetime.now()}야. Json타입. 일정 정보를 파악 못하면 summary만 반환해"},
                 {"role": "user", "content": text}
             ]
         )
-        print('='*100)
-        print(response)
-        print('='*100)
         
         return response

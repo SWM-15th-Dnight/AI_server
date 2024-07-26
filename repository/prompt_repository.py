@@ -1,14 +1,14 @@
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 
-from model.prompt_model import Prompt
+from model.prompt_model import Prompt, PromptCallCount
 
 class PromptRepository:
     
     def __init__(self, db : Session):
         self.db = db
     
-    def create_prompt(self, data: Prompt):
+    def create_prompt(self, data: Prompt) -> Prompt:
         self.db.add(data)
         self.db.commit()
         return data
@@ -26,3 +26,14 @@ class PromptRepository:
     
     def get_all_prompt(self) -> list[Prompt]:
         return self.db.query(Prompt).all()
+
+
+class PromptCallCountRepository:
+    
+    def __init__(self, db : Session):
+        self.db = db
+
+    def create_prompt_call_count(self, prompt_call_count: PromptCallCount):
+        self.db.add(prompt_call_count)
+        self.db.commit()
+        return True

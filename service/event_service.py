@@ -20,7 +20,8 @@ class EventService:
         prompt = self.prompt_repo.get_prompt(data.prompt_id)
         
         gpt_response = gpt_api.text_request(text = data.plain_text,
-                                            prompt = prompt.prompt_main)
+                                            prompt = prompt.prompt_main,
+                                            model = 'gpt-4o-mini')
         
         end_time = time.time()
 

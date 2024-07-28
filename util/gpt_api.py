@@ -27,6 +27,10 @@ class GptAPI:
 
     def text_request(self, text, prompt, model = 'gpt-4o'):
         """
+        GPT API에 text를 보내는 가장 일반적인 방법
+        
+        반환 값은 다음과 같다.
+        
         response_object = {
             "choices": [
                 {

@@ -2,20 +2,25 @@ from fastapi import HTTPException
 from sqlalchemy.exc import *
 
 class DataBaseExceptionMeta(type):
+    """
+    repository 클래스를 생성할 때 metaclass로써 지정하여 클래스 선언하면
+    
+    인스턴새 생성 시에 모든 메서드에 db_exception_handler 데코레이터를 삽입한다.
+    """
     def __new__(cls, name, bases, dct):
         for k, v in dct.items():
             if callable(v) and k != "__init__":
-                dct[k] = cls.db_exception_handler(v)
+                dct[k] = cls._db_exception_handler(v)
         return super().__new__(cls, name, bases, dct)
 
 
-    def db_exception_handler(repo_func):
+    def _db_exception_handler(repo_func):
         """
         Database Connect Exception Handler
         
         Null 반환 파악과 Sqlalchemy 단에서 발생하는 예외를 캐치하여 HTTPException으로 보낸다.
         
-        Repository의 모든 메서드에서 데코레이터로 가져다 쓰면 된다.
+        필요 시, 추가적으로 예외코드를 삽입해도 좋다.
         """
         def wrapper(*args, **kwargs):
             try :

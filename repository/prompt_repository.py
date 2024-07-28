@@ -40,15 +40,15 @@ class PromptCallCountRepository(metaclass=DataBaseExceptionMeta):
         self.db.commit()
         return True
     
-    def success_call(self, prompt_id):
-        prompt = self.db.query(PromptCallCount).get(prompt_id)
-        prompt.success_call += 1
-        prompt.total_call += 1
+    def success_call(self, prompt_id : int):
+        prompt_call_count = self.db.query(PromptCallCount).get(prompt_id)
+        prompt_call_count.success_call += 1
+        prompt_call_count.total_call += 1
         self.db.commit()
         return True
     
-    def fail_call(self, prompt_id):
-        prompt = self.db.query(PromptCallCount).get(prompt_id)
-        prompt.total_call += 1
+    def fail_call(self, prompt_id : int):
+        prompt_call_count = self.db.query(PromptCallCount).get(prompt_id)
+        prompt_call_count.total_call += 1
         self.db.commit()
         return True

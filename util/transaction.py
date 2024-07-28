@@ -32,7 +32,7 @@ class DataBaseExceptionMeta(type):
                 return result
             # DB 연결 에러
             except OperationalError:
-                raise HTTPException(500, "DB connect fail")
+                raise HTTPException(502, "DB connect fail")
             # DB 제약 조건에 저촉 (unique, pk, not-null)
             except IntegrityError as e:
                 raise HTTPException(422, "DB 제약 조건 확인 필요")

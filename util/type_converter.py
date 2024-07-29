@@ -37,8 +37,6 @@ def model_to_dto(model_instance: Base, dto: T) -> T:
 
 def model_to_json(model_instance: Base, dto: BaseModel) -> dict:
     """
-    model 객체를 딕셔너리로 바꾼 뒤, JSONResponse로 반환 가능한 dict 타입의 json 형식(모든 키 밸류 str, int, bool로 지정)으로 변환한다.
-    
-    
+    model 객체를 딕셔너리로 바꾼 뒤, JSONResponse로 반환 가능한 dict 타입의 json 형식(모든 키 밸류 str, int, bool로 지정)으로 변환하는 함수
     """
     return dto.model_validate(_to_dict(model_instance)).model_dump(mode="json")

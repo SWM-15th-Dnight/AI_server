@@ -21,7 +21,8 @@ class EventService:
         
         # gpt call, 마지막 파라미터로 모델 수정 가능
         gpt_response = gpt_api.text_request(text = data.plain_text,
-                                            prompt = prompt.prompt_main)
+                                            prompt = prompt.prompt_main,
+                                            model = prompt.prompt_model)
         
         end_time = time.time()
 

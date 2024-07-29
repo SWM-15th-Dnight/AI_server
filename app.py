@@ -8,6 +8,7 @@ app = FastAPI()
 app.include_router(event_controller.router, prefix='/api/v1', tags=['calendar_api'])
 app.include_router(prompt_controller.router, prefix='/api/v1/prompt', tags=['prompt_api'])
 
+
 @app.get('/')
 def home():
     return {'hello' : 'calinify'}

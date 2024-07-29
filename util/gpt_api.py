@@ -1,7 +1,7 @@
 from openai import OpenAI
 from datetime import datetime
 
-from config import OPENAI_API_KEY
+from config import OPENAI_API_KEY, GPT_PLAIN_TEXT_MODEL
 
 class GptAPI:
 
@@ -9,7 +9,7 @@ class GptAPI:
         self.client = OpenAI(api_key=OPENAI_API_KEY)
     
     
-    def create_prompt_request(self, prompt, model = 'gpt-4o'):
+    def create_prompt_request(self, prompt, model=GPT_PLAIN_TEXT_MODEL):
         """
         정상적인 요청이 아닌, 새로 생긴 프롬프트의 토큰 수를 확인하기 위한 요청
         """
@@ -25,7 +25,7 @@ class GptAPI:
         return response
     
 
-    def text_request(self, text, prompt, model = 'gpt-4o'):
+    def text_request(self, text, prompt, model=GPT_PLAIN_TEXT_MODEL):
         """
         GPT API에 text를 보내는 가장 일반적인 방법
         

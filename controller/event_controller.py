@@ -4,13 +4,13 @@ from sqlalchemy.orm import Session
 
 from config import get_db
 
+from service import EventService
 from dto.event_dto import PlainTextRequestDTO, EventProcessedResponseDTO
-from service.event_service import EventService
 
 
 router = APIRouter()
 
-@router.post('/plainText')
+@router.post('/plainText', status_code=201, summary="자연어 입력을 통해 일정 데이터를 생성하기 위한 엔드포인트")
 async def request_processing_plain_text(data : PlainTextRequestDTO, db : Session = Depends(get_db)) -> EventProcessedResponseDTO:
     
     event_service = EventService(db)

@@ -10,8 +10,7 @@ class EventProcessedResponseDTO(BaseModel):
     priority : int = Field(None, title="event priority", description="일정의 우선 순위, 특별히 부여되지 않을 경우 spring에서 기본값으로 처리.")
     response_time : float = Field(None, title="gpt response time", description="gpt의 응답 시간")
     repeat_rule : str = Field(None, title="event repeat rule", description="ics 규격에 맞춘 자동 입력 시간")
-    used_total_token : int
-    # used_token : int = Field(..., title="using input token")
+    used_token : int = Field(..., title="using input token", description="파라미터를 제외한, 오로지 유저가 인풋에 사용한 토큰 수")
 
 
 class PlainTextRequestDTO(BaseModel):

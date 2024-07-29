@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 
-from util.transaction import DataBaseExceptionMeta
+from util import DataBaseExceptionMeta
 
 from model.prompt_model import Prompt, PromptCallCount
 
@@ -41,14 +41,14 @@ class PromptCallCountRepository(metaclass=DataBaseExceptionMeta):
         return True
     
     def success_call(self, prompt_id : int):
-        prompt_call_count = self.db.query(PromptCallCount).get(prompt_id)
+        prompt_call_count : PromptCallCount = self.db.query(PromptCallCount).get(prompt_id)
         prompt_call_count.success_call += 1
         prompt_call_count.total_call += 1
         self.db.commit()
         return True
     
     def fail_call(self, prompt_id : int):
-        prompt_call_count = self.db.query(PromptCallCount).get(prompt_id)
+        prompt_call_count: PromptCallCount = self.db.query(PromptCallCount).get(prompt_id)
         prompt_call_count.total_call += 1
         self.db.commit()
         return True

@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, func
-from sqlalchemy.orm import DeclarativeBase, relationship
+from sqlalchemy.orm import relationship
 
-class Base(DeclarativeBase):
-    pass
+from config import Base
+
 
 class Prompt(Base):
     __tablename__ = "prompt"
@@ -12,6 +12,7 @@ class Prompt(Base):
     prompt_description = Column(String, nullable=True)
     prompt_main = Column(Text, nullable=False)
     prompt_token = Column(Integer, nullable=False)
+    prompt_model = Column(String, nullable=False)
     created_at = Column(DateTime, default=func.current_timestamp())
     updated_at = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
     

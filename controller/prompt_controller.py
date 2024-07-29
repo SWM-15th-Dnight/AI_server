@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 
 from config import get_db
-from service.prompt_service import PromptService
+from service import PromptService
 
 from dto.prompt_dto import CreatePromptRequestDTO, UpdatePromptRequestDTO, PromptResponseDTO
 

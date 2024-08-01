@@ -25,7 +25,7 @@ class GptAPI:
         return response
     
 
-    def text_request(self, text, prompt, model=GPT_PLAIN_TEXT_MODEL):
+    def text_request(self, text, prompt, temperature, model=GPT_PLAIN_TEXT_MODEL):
         """
         GPT API에 text를 보내는 가장 일반적인 방법
         
@@ -58,6 +58,7 @@ class GptAPI:
         response = self.client.chat.completions.create(
             response_format={"type" : "json_object"},
             model=model,
+            temperature=temperature,
             messages=[
                 # 주입받은 프롬프트를 활용하고, 시간은 서버의 시간을 사용.
                 # json_object 타입의 response_format을 쓰기 위해서는 프롬프트 내에 Json이라는 문자 자체가 있어야함.

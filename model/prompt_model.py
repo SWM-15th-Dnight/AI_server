@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, func
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, func, Float
 from sqlalchemy.orm import relationship
 
 from config import Base
@@ -13,6 +13,7 @@ class Prompt(Base):
     prompt_main = Column(Text, nullable=False)
     prompt_token = Column(Integer, nullable=False)
     prompt_model = Column(String, nullable=False)
+    prompt_temperature = Column(Float, nullable=False)
     created_at = Column(DateTime, default=func.current_timestamp())
     updated_at = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
     

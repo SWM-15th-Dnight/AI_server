@@ -15,6 +15,6 @@ async def request_processing_plain_text(data : PlainTextRequestDTO, db : Session
     
     event_service = EventService(db)
     
-    processed_event = event_service.processing_plain_text(data)
+    (processed_event, status_code) = event_service.processing_plain_text(data)
     
-    return JSONResponse(processed_event, 201)
+    return JSONResponse(processed_event, status_code)

@@ -27,31 +27,19 @@ class EventService:
         
         end_time = time.time()
 
-        response = json.loads(gpt_response.choices[0].message.content)
-        
-        # 필수값 확인 및 GPT call 실패 판단
-        try : response["summary"], response["start"], response["end"]
-        except :
-            self.prompt_call_count_repo.fail_call(data.promptId)
-            raise HTTPException(422, detail={"message" : "일정 데이터 포착 실패",
-                                              "summary" : response.get("summary")})
+        response : dict = json.loads(gpt_response.choices[0].message.content)
         
         # gpt response_time 및 유저의 입력이 사용한 토큰 저장
         response['responseTime'] = round(end_time - start_time, 5)
         response['usedToken'] = (gpt_response.usage.total_tokens - prompt.prompt_token)
         
+        # 필수값 확인 및 GPT call 실패 판단
+        try : response["summary"], response["start"], response["end"]
+        except :
+            self.prompt_call_count_repo.fail_call(data.promptId)
+            return (response, 202)
+        
         # 성공횟수 추가
         self.prompt_call_count_repo.success_call(data.promptId)
         
-        return response
-    
-    def processing_plain_text_test(self, data: PlainTextRequestDTO) -> dict:
-        
-        response = dict()
-        
-        test_db_call = self.prompt_repo.get_prompt(data.prompt_id).prompt_main
-        
-        response["summary"] = data.plain_text
-        response["test_db_call"] = test_db_call
-        
-        return response
+        return (response, 201)

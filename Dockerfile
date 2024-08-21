@@ -13,10 +13,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 5. 앱 소스 코드 복사
 COPY . .
 
-# 6. .env 파일 복사
-COPY .env .env
-
-# 7. 환경 변수 로드
-RUN export $(grep -v '^#' .env | xargs)
-
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "5050"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -32,6 +32,7 @@ jobs:
       with:
         aws-access-key-id: ${{ env.ECR_IAM_ACCESS_KEY }}
         aws-secret-access-key: ${{ env.ECR_IAM_SECRET_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -56,7 +57,7 @@ jobs:
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
-        ssh-private-key: ${{ env.AWS_MONO_EC2_PEM }}
+        ssh-private-key: ${{ env.EC2_PEM_KEY }}
     
     - name: Deploy Docker image to EC2
       run: |       
@@ -78,5 +79,5 @@ jobs:
           fi
 
           # Run the new Docker container
-          sudo docker run -d --name ai-server-dev --env-file /home/${{ env.EC2_USER }}/.env -p 8080:8080 ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+          sudo docker run -d --name ai-server-dev --env-file /home/${{ env.EC2_USER }}/.env -p 5050:5050 ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
         EOF

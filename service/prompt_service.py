@@ -30,7 +30,7 @@ class PromptService:
         new_prompt = dto_to_model(data, Prompt)
         new_prompt.prompt_token = token
         
-        self.prompt_repo.create_prompt(new_prompt)
+        new_prompt = self.prompt_repo.create_prompt(new_prompt)
         
         prompt_call_count = PromptCallCount(prompt_id=new_prompt.prompt_id)
         self.prompt_call_count_repo.create_prompt_call_count(prompt_call_count)

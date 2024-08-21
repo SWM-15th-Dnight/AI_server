@@ -13,6 +13,7 @@ class CreatePromptRequestDTO(BaseModel):
     prompt_main : str = Field(..., title="프롬프트 본문 내용")
     prompt_description : str = Field(..., title="프롬프트 부가 설명")
     prompt_model : LLMType = Field(..., title="프롬프트에서 사용될 llm 모델 명")
+    prompt_temperature : float = Field(0.5, title="프롬프트 무작위도, 기본값 : 0.5")
     
 class PromptResponseDTO(BaseModel):
     

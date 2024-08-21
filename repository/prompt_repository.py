@@ -10,10 +10,10 @@ class PromptRepository(metaclass=DataBaseExceptionMeta):
     def __init__(self, db : Session):
         self.db = db
     
-    def create_prompt(self, data: Prompt) -> Prompt:
-        self.db.add(data)
+    def create_prompt(self, prompt: Prompt) -> Prompt:
+        self.db.add(prompt)
         self.db.commit()
-        return data
+        return prompt
     
     def get_prompt(self, prompt_id : int) -> Prompt:
         return self.db.query(Prompt).get(prompt_id)
@@ -38,7 +38,7 @@ class PromptCallCountRepository(metaclass=DataBaseExceptionMeta):
     def create_prompt_call_count(self, prompt_call_count: PromptCallCount):
         self.db.add(prompt_call_count)
         self.db.commit()
-        return True
+        return prompt_call_count
     
     def success_call(self, prompt_id : int):
         prompt_call_count : PromptCallCount = self.db.query(PromptCallCount).get(prompt_id)

@@ -5,3 +5,5 @@ __pycache__/
 
 test.py
 gpt_test
+
+config/environment_dev.py

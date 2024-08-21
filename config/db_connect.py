@@ -1,13 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
-from .environment import (CALINIFY_DATABASE_HOST,
-                  CALINIFY_DATABASE_PASSWORD,
-                  CALINIFY_DATABASE_PORT,
-                  CALINIFY_DATABASE_USERNAME,
-                  CALINIFY_DATABASE_TABLE_NAME)
+from .environment import (DB_HOST,
+                  DB_PASSWORD,
+                  DB_PORT,
+                  DB_USERNAME,
+                  DB_TABLE_NAME)
 
-_url = f"mysql+pymysql://{CALINIFY_DATABASE_USERNAME}:{CALINIFY_DATABASE_PASSWORD}@{CALINIFY_DATABASE_HOST}:{CALINIFY_DATABASE_PORT}/{CALINIFY_DATABASE_TABLE_NAME}"
+_url = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_TABLE_NAME}"
 
 _engine = create_engine(url=_url, echo=True)
 

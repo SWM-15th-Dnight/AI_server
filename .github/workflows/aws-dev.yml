@@ -55,6 +55,7 @@ jobs:
         echo "CALINIFY_DATABASE_USERNAME=${{ secrets.CALINIFY_DATABASE_USERNAME }}" >> .env
         echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
         echo "GPT_PLAIN_TEXT_MODEL=${{ secrets.GPT_PLAIN_TEXT_MODEL }}" >> .env
+        echo "CALINIFY_AI_SERVER_PROFILE=${{ secrets.CALINIFY_AI_SERVER_PROFILE }}" >> .env
         
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3

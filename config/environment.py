@@ -1,11 +1,28 @@
 import os
 
-DB_HOST = os.environ.get("CALINIFY_DATABASE_HOST")
-DB_USERNAME = os.environ.get("CALINIFY_DATABASE_USERNAME")
-DB_PASSWORD = os.environ.get("CALINIFY_DATABASE_PASSWORD")
-DB_PORT = os.environ.get("CALINIFY_DATABASE_PORT")
-DB_TABLE_NAME = os.environ.get("CALINIFY_DATABASE_TABLE_NAME")
+if os.environ.get("CALINIFY_AI_SERVER_PROFILE") == "PROD":
 
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+    DB_HOST = os.environ.get("CALINIFY_DATABASE_HOST")
+    DB_USERNAME = os.environ.get("CALINIFY_DATABASE_USERNAME")
+    DB_PASSWORD = os.environ.get("CALINIFY_DATABASE_PASSWORD")
+    DB_PORT = os.environ.get("CALINIFY_DATABASE_PORT")
+    DB_TABLE_NAME = os.environ.get("CALINIFY_DATABASE_TABLE_NAME")
 
-GPT_PLAIN_TEXT_MODEL = os.environ.get("GPT_PLAIN_TEXT_MODEL")
+    OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+
+    GPT_PLAIN_TEXT_MODEL = os.environ.get("GPT_PLAIN_TEXT_MODEL")
+
+else:
+    from dotenv import dotenv_values
+
+    ENV = dotenv_values(f'{os.path.dirname(__file__)}/.env')
+
+    DB_HOST = ENV["CALINIFY_DATABASE_HOST"]
+    DB_USERNAME = ENV["CALINIFY_DATABASE_USERNAME"]
+    DB_PASSWORD = ENV["CALINIFY_DATABASE_PASSWORD"]
+    DB_PORT = ENV["CALINIFY_DATABASE_PORT"]
+    DB_TABLE_NAME = ENV["CALINIFY_DATABASE_TABLE_NAME"]
+
+    OPENAI_API_KEY = ENV["OPENAI_API_KEY"]
+
+    GPT_PLAIN_TEXT_MODEL = ENV["GPT_PLAIN_TEXT_MODEL"]

@@ -67,6 +67,9 @@ jobs:
         # SSH into EC2 and run Docker commands
         scp -o StrictHostKeyChecking=no .env ${{ env.EC2_USER }}@${{ env.EC2_HOST }}:/home/${{ env.EC2_USER }}/.env
         ssh -o StrictHostKeyChecking=no ${{ env.EC2_USER }}@${{ env.EC2_HOST }} << 'EOF'
+          # Set timezone to Asia/Seoul
+          ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+
           # Login to ECR
           aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
 

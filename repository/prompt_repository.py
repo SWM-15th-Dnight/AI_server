@@ -15,7 +15,7 @@ class PromptRepository(metaclass=DataBaseExceptionMeta):
         self.db.commit()
         return prompt
     
-    def get_prompt(self, prompt_id : int) -> Prompt:
+    def get_prompt(self, prompt_id : int) -> Prompt | None:
         return self.db.query(Prompt).get(prompt_id)
     
     def update_prompt(self, data : BaseModel, origin_prompt: Prompt) -> Prompt:

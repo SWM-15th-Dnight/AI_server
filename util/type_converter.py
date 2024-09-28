@@ -1,10 +1,11 @@
 from config import Base
 from pydantic import BaseModel
-from typing import TypeVar
+from typing import TypeVar, Type
 
-T = TypeVar("T")
+T = TypeVar("T", bound=BaseModel)
+DM_T = TypeVar("DM_T", bound=Base)
 
-def dto_to_model(dto: BaseModel, model : T) -> T:
+def dto_to_model(dto: BaseModel, model : Type[DM_T]) -> DM_T:
     """
     pydantic BaseModel 타입인 dto를 sqlalchemy Declarative 클래스 모델로 변환하는 함수
     
@@ -26,7 +27,7 @@ def _to_dict(model_instance: Base) -> dict:
     return {column.name: getattr(model_instance, column.name) for column in model_instance.__table__.columns if getattr(model_instance, column.name)}
 
 
-def model_to_dto(model_instance: Base, dto: T) -> T:
+def model_to_dto(model_instance: Base, dto: Type[T]) -> T:
     """
     sqlalchemy Declarative 클래스 모델을 pydantic BaseModel의 하위 타입인 DTO로 변환하는 함수
     
@@ -35,7 +36,7 @@ def model_to_dto(model_instance: Base, dto: T) -> T:
     return dto.model_validate(_to_dict(model_instance))
 
 
-def model_to_json(model_instance: Base, dto: BaseModel) -> dict:
+def model_to_json(model_instance: Base, dto: Type[BaseModel]) -> dict:
     """
     model 객체를 딕셔너리로 바꾼 뒤, JSONResponse로 반환 가능한 dict 타입의 json 형식(모든 키 밸류 str, int, bool로 지정)으로 변환하는 함수
     """

@@ -1,6 +1,6 @@
+from typing import Union, Tuple
 import json
 import time
-from fastapi import HTTPException
 from util import GptAPI
 
 from dto.event_dto import PlainTextRequestDTO, EventProcessedResponseDTO
@@ -12,7 +12,7 @@ class EventService:
         self.prompt_repo = PromptRepository(db)
         self.prompt_call_count_repo = PromptCallCountRepository(db)
 
-    def processing_plain_text(self, data: PlainTextRequestDTO) -> EventProcessedResponseDTO:
+    def processing_plain_text(self, data: PlainTextRequestDTO) -> Tuple[Union[dict, EventProcessedResponseDTO], int]:
 
         start_time = time.time()
         

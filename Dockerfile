@@ -7,6 +7,9 @@ WORKDIR /app
 # 3. 필요 파일 복사
 COPY requirements.txt ./
 
+ENV TZ=Asia/Seoul
+RUN ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime && echo "Asia/Seoul" > /etc/timezone
+
 # 4. 패키지 설치
 RUN pip install --no-cache-dir -r requirements.txt
 

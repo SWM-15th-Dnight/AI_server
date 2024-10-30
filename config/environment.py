@@ -11,6 +11,7 @@ if os.environ.get("CALINIFY_AI_SERVER_PROFILE") == "PROD":
     OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
     GPT_PLAIN_TEXT_MODEL = os.environ.get("GPT_PLAIN_TEXT_MODEL")
+    GPT_IMAGE_MODEL = "gpt-4o"
 
 else:
     from dotenv import dotenv_values
@@ -26,3 +27,4 @@ else:
     OPENAI_API_KEY = ENV["OPENAI_API_KEY"]
 
     GPT_PLAIN_TEXT_MODEL = ENV["GPT_PLAIN_TEXT_MODEL"]
+    GPT_IMAGE_MODEL = ENV["GPT_IMAGE_MODEL"]

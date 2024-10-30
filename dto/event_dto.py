@@ -16,3 +16,8 @@ class PlainTextRequestDTO(BaseModel):
     
     plainText : str = Field(..., title="Natural Language Text", description="일정 입력이 가능한 데이터로 변환시킬 자연어 데이터")
     promptId : int
+
+class ImageRequestDTO(BaseModel):
+    
+    promptId : int
+    image : bytes

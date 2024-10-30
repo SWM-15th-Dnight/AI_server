@@ -1,7 +1,7 @@
 from openai import OpenAI
 from datetime import datetime
 
-from config import OPENAI_API_KEY, GPT_PLAIN_TEXT_MODEL
+from config import OPENAI_API_KEY, GPT_PLAIN_TEXT_MODEL, GPT_IMAGE_MODEL
 
 class GptAPI:
 
@@ -20,6 +20,34 @@ class GptAPI:
                 {"role": "system", "content": f"{prompt}, 현재 시간은 {datetime.now()}야. Json타입. 일정 정보를 파악 못하면 summary만 반환해"},
                 {"role": "user", "content": ""}
             ]
+        )
+        
+        return response
+    
+    
+    def image_reqeust(self, prompt, image, temperature, model=GPT_IMAGE_MODEL):
+        
+        response = self.client.chat.completions.create(
+            response_format={"type":"json_object"},
+            model=model,
+            temperature=temperature,
+            messages=[
+                {
+                "role": "user",
+                "content": [
+                    {
+                    "type": "text",
+                    "text": f"{prompt}, 현재 시간은 {datetime.now()}야. Json타입. 일정 정보를 파악 못하면 summary만 반환해",
+                    },
+                    {
+                    "type": "image_url",
+                    "image_url": {
+                        "url":  f"data:image/jpeg;base64,{image}"
+                    },
+                    },
+                ],
+                }
+            ],
         )
         
         return response

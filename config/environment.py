@@ -12,6 +12,12 @@ if os.environ.get("CALINIFY_AI_SERVER_PROFILE") == "PROD":
 
     GPT_PLAIN_TEXT_MODEL = os.environ.get("GPT_PLAIN_TEXT_MODEL")
     GPT_IMAGE_MODEL = "gpt-4o"
+    
+    S3_IAM_ACCESS_KEY = os.environ.get("S3_IAM_ACCESS_KEY")
+    S3_IAM_SECRET_KEY = os.environ.get("S3_IAM_SECRET_KEY")
+    
+    AWS_REGION = os.environ.get("AWS_REGION")
+    S3_BUCKET_NAME = os.environ.get("S3_BUCKET_NAME")
 
 else:
     from dotenv import dotenv_values
@@ -28,3 +34,9 @@ else:
 
     GPT_PLAIN_TEXT_MODEL = ENV["GPT_PLAIN_TEXT_MODEL"]
     GPT_IMAGE_MODEL = ENV["GPT_IMAGE_MODEL"]
+    
+    S3_IAM_ACCESS_KEY = ENV["S3_IAM_ACCESS_KEY"]
+    S3_IAM_SECRET_KEY = ENV["S3_IAM_SECRET_KEY"]
+    
+    AWS_REGION = ENV["AWS_REGION"]
+    S3_BUCKET_NAME = ENV["S3_BUCKET_NAME"]

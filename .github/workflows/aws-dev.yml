@@ -57,9 +57,9 @@ jobs:
         echo "GPT_PLAIN_TEXT_MODEL=${{ secrets.GPT_PLAIN_TEXT_MODEL }}" >> .env
         echo "GPT_IMAGE_MODEL=${{ secrets.GPT_IMAGE_MODEL }}" >> .env
         echo "CALINIFY_AI_SERVER_PROFILE=${{ secrets.CALINIFY_AI_SERVER_PROFILE }}" >> .env
-        echo "S3_IAM_ACCESS_KEY=${{ secrets.S3_IAM_ACCESS_KEY }}" >> .env"
-        echo "S3_IAM_SECRET_KEY=${{ secrets.S3_IAM_SECRET_KEY }}" >> .env"
-        echo "S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}" >> .env"
+        echo "S3_IAM_ACCESS_KEY=${{ secrets.S3_IAM_ACCESS_KEY }}" >> .env
+        echo "S3_IAM_SECRET_KEY=${{ secrets.S3_IAM_SECRET_KEY }}" >> .env
+        echo "S3_BUCKET_NAME=${{ secrets.S3_BUCKET_NAME }}" >> .env
         
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3

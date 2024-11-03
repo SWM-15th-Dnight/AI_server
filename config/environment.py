@@ -1,6 +1,6 @@
 import os
 
-if os.environ.get("CALINIFY_AI_SERVER_PROFILE") == "PROD":
+if os.environ.get("CALINIFY_AI_SERVER_PROFILE") in ("DEV", "PROD"):
 
     DB_HOST = os.environ.get("CALINIFY_DATABASE_HOST")
     DB_USERNAME = os.environ.get("CALINIFY_DATABASE_USERNAME")
@@ -11,7 +11,7 @@ if os.environ.get("CALINIFY_AI_SERVER_PROFILE") == "PROD":
     OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
     GPT_PLAIN_TEXT_MODEL = os.environ.get("GPT_PLAIN_TEXT_MODEL")
-    GPT_IMAGE_MODEL = "gpt-4o"
+    GPT_IMAGE_MODEL = os.environ.get("GPT_IMAGE_MODEL")
     
     S3_IAM_ACCESS_KEY = os.environ.get("S3_IAM_ACCESS_KEY")
     S3_IAM_SECRET_KEY = os.environ.get("S3_IAM_SECRET_KEY")

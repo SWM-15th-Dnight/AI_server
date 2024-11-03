@@ -75,7 +75,7 @@ jobs:
           ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
 
           # Login to ECR
-          aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
+          aws ecr get-login-password --region ap-northeast-2 | sudo docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
 
           sudo docker login -u AWS -p $(aws ecr get-login-password --region ap-northeast-2) ${{ steps.login-ecr.outputs.registry }}
 

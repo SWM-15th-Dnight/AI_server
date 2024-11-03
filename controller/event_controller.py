@@ -31,7 +31,7 @@ async def reqeust_processing_image(promptId: int = Form(...),
     
     img = await image.read()
     
-    saved_img_id = s3_bucket.upload_file(image, imageUUID)
+    saved_img_id = s3_bucket.upload_file(image, imageUUID, image.filename)
     
     data = ImageRequestDTO(promptId=promptId, image=img, image_uuid=saved_img_id)
     

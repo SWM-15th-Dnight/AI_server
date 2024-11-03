@@ -21,3 +21,4 @@ class ImageRequestDTO(BaseModel):
     
     promptId : int
     image : bytes
+    image_uuid : str

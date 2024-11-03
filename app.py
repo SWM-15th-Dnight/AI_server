@@ -1,4 +1,5 @@
 import os
+import time
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -8,8 +9,20 @@ import uvicorn
 from config import refresh_connection_pool
 from controller import prompt_controller, event_controller
 
+# 시간대 Aisa/Seoul로 고정
+os.environ['TZ'] = 'Asia/Seoul'
+time.tzset()
+
+# DB Connection pool 관리 스케쥴러
 @asynccontextmanager
 async def lifespan(app : FastAPI):
+    """
+    DB connection pool을 관리하는 스케쥴러
+    
+    900초마다 지속적으로 커넥션 핑퐁을 통해 커넥션 유지
+    
+    셧다운 시 안전하게 커넥션 해제
+    """
     scheduler = BackgroundScheduler()
     scheduler.add_job(refresh_connection_pool, trigger='interval', seconds=900)
     scheduler.start()

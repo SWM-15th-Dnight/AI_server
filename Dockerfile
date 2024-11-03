@@ -4,6 +4,13 @@ FROM python:3.12-slim
 # 2. 작업 디렉토리 설정
 WORKDIR /app
 
+# 시간대 환경 변수 설정
+ENV TZ=Asia/Seoul
+
+# 시간대 정보 설치 및 패키지 업데이트
+RUN apt-get update && apt-get install -y tzdata && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # 3. 필요 파일 복사
 COPY requirements.txt ./
 
